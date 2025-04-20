@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Alunos</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="container">
+		<h2>Alunos Cadastrados</h2>
+		<div class="aluno-grid">
+			<div th:each="aluno : ${lista}" class="aluno-card">
+
+				<img th:src="@{'/aluno/foto/' + ${aluno.id}}" alt="Foto do Aluno"
+					class="img-thumbnail" style="max-width: 200px;">
+
+				<h3 th:text="${aluno.nome}">Nome</h3>
+				<p>
+					<strong>RA:</strong> <span th:text="${aluno.RA}"></span>
+				</p>
+				<p>
+					<strong>Curso:</strong> <span th:text="${aluno.curso}"></span>
+				</p>
+				<p>
+					<strong>Ano:</strong> <span th:text="${aluno.anoIngresso}"></span>
+				</p>
+				<p>
+					<strong>Sobre Mim:</strong> <span
+						th:text="${aluno.comentarioHistorico}"></span>
+				</p>
+				<p>
+					<strong>Sobre a Fatec:</strong> <span
+						th:text="${aluno.comentarioFatec}"></span>
+				</p>
+				<p>
+					<strong>Que tal?</strong> <span th:text="${aluno.comentarioLivre}"></span>
+				</p>
+
+				<!-- STATUS -->
+				<p>
+					<strong>Status:</strong> <span
+						th:text="${aluno.validado} ? 'Válido' : 'Inválido'"
+						th:classappend="${aluno.validado} ? 'status-valido' : 'status-invalido'">
+					</span>
+				</p>
+
+				<!-- BOTÃO DE VALIDAÇÃO -->
+				<form th:action="@{/coordenador/alterar-status}" method="post">
+					<input type="hidden" name="id" th:value="${aluno.id}" />
+					<button type="submit"
+						th:text="${aluno.validado} ? 'Marcar como Inválido' : 'Marcar como Válido'"
+						class="botao-status"></button>
+				</form>
+			</div>
+			<form th:action="@{/}">
+				<button type="submit" class="btn btn-outline-danger btn-sm">Voltar</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

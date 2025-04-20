@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #004aad, #00c6ff);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Login-Form {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.texto-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.texto-header h2 {
+  margin-bottom: 5px;
+  color: #004aad;
+}
+
+.texto-header p {
+  font-size: 14px;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #004aad;
+  outline: none;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  background-color: #004aad;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #00337a;
+}
+
+.cadastro {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.cadastro a {
+  color: #004aad;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.cadastro a:hover {
+  text-decoration: underline;
+}
+
+.alert-danger {
+  margin-bottom: 15px;
+  font-size: 14px;
+}

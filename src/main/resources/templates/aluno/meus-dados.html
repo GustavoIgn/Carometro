@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Meus Dados</title>
+<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="container mt-5">
+		<h2 class="text-center mb-4">Meus Dados</h2>
+
+		<div class="card mx-auto" style="max-width: 600px;">
+			<div class="card-body text-center">
+				<img th:src="@{'/aluno/foto/' + ${aluno.id}}" alt="Foto do Aluno"
+					class="img-thumbnail mb-3" style="max-width: 200px;">
+
+				<h5 class="card-title" th:text="${aluno.nome}">Nome do Aluno</h5>
+
+				<p>
+					<strong>RA:</strong> <span th:text="${aluno.RA}"></span>
+				</p>
+				<p>
+					<strong>Curso:</strong> <span th:text="${aluno.curso}"></span>
+				</p>
+				<p>
+					<strong>Ano:</strong> <span th:text="${aluno.anoIngresso}"></span>
+				</p>
+				<p>
+					<strong>Sobre Mim:</strong> <span
+						th:text="${aluno.comentarioHistorico}"></span>
+				</p>
+				<p>
+					<strong>Sobre a Fatec:</strong> <span
+						th:text="${aluno.comentarioFatec}"></span>
+				</p>
+				<p>
+					<strong>Que tal?</strong> <span th:text="${aluno.comentarioLivre}"></span>
+				</p>
+
+				<form th:action="@{/aluno/formulario}" method="get" class="mb-2">
+					<input type="hidden" name="id" th:value="${aluno.id}" />
+					<button type="submit" class="btn btn-warning">Editar</button>
+				</form>
+
+				<form th:action="@{/aluno}" method="post"
+					onsubmit="return confirm('Tem certeza que deseja excluir seus dados?')">
+					<input type="hidden" name="_method" value="delete" /> <input
+						type="hidden" name="id" th:value="${aluno.id}" />
+					<button type="submit" class="btn btn-danger">Excluir</button>
+				</form>
+
+				<form th:action="@{/deletar-conta}" method="post" class="text-end">
+					<button type="submit" class="btn btn-outline-danger btn-sm"
+						onclick="return confirm('Tem certeza que deseja excluir sua conta?')">
+						Apagar Conta</button>
+				</form>
+				
+				<form th:action="@{/}">
+					<button type="submit" class="btn btn-outline-danger btn-sm">Voltar</button>
+				</form>
+				<div th:if="${!aluno.validado}">
+					<p style="color: red;">Seu cadastro ainda não foi validado por
+						um coordenador ou foi considerado inválido, aguarde.</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

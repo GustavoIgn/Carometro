@@ -1,0 +1,43 @@
+<!-- formulario.html (usado no método /aluno/formulario) -->
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro de Aluno</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+	<div class="container">
+		<h2 th:text="${aluno != null} ? 'Editar Aluno' : 'Cadastro de Aluno'">Cadastro
+			de Aluno</h2>
+
+		<form th:action="@{/aluno}" method="post" th:object="${aluno}"
+			enctype="multipart/form-data">
+			<input type="hidden" th:field="*{id}" /> <input type="text"
+				th:field="*{nome}" placeholder="Nome completo" required /> <input
+				type="text" th:field="*{RA}" placeholder="RA" required /> <input
+				type="text" th:field="*{curso}" placeholder="Curso" /> <input
+				type="text" th:field="*{anoIngresso}" placeholder="Ano Ingresso" />
+			<input type="text" th:field="*{links}"
+				placeholder="Links (LinkedIn, GitHub...)" />
+			<textarea th:field="*{comentarioHistorico}"
+				placeholder="Comentário Histórico"></textarea>
+			<textarea th:field="*{comentarioFatec}"
+				placeholder="Comentário Fatec"></textarea>
+			<textarea th:field="*{comentarioLivre}"
+				placeholder="Comentário Livre"></textarea>
+			<input type="file" th:field="*{foto}" name="foto" accept="image/*" />
+			<button type="submit">Cadastrar</button>
+		</form>
+		<form th:action="@{/deletar-conta}" method="post" class="text-end">
+			<button type="submit" class="btn btn-outline-danger btn-sm"
+				onclick="return confirm('Tem certeza que deseja excluir sua conta?')">
+				Apagar Conta</button>
+		</form>
+
+		<form th:action="@{/}">
+			<button type="submit" class="btn btn-outline-danger btn-sm">Voltar</button>
+		</form>
+	</div>
+</body>
+</html>
