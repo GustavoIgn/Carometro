@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Curso</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="topo-faixa">
+	    <div class="logo-texto">FATEC ZONA LESTE</div>
+	</div>
+    <div class="container">
+        <h2 th:text="${curso.id != null} ? 'Editar Curso' : 'Cadastrar Novo Curso'">Formulário de Curso</h2>
+
+        <form th:action="@{/curso}" method="post">
+            <input type="hidden" name="id" th:value="${curso.id}" />
+
+            <label for="nome">Nome do Curso:</label>
+            <input type="text" id="nome" name="nome" th:value="${curso.nome}" required />
+
+            <label for="anoImplementacao">Ano de Implementação:</label>
+            <input type="number" id="anoImplementacao" name="anoImplementacao" th:value="${curso.anoImplementacao}"  min="1900" max="2050" required />
+            
+            <label for="coord">Coordenador:</label>
+			<select id="coord" name="coordId" required>
+    			<option value="">Selecione um coordenador</option>
+    			<option th:each="coord : ${coordenadores}"
+            		th:value="${coord.id}"
+            		th:text="${coord.nome}"
+            		th:selected="${curso.coord?.id == coord.id}">
+    			</option>
+			</select>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+        
+	    <!-- Botão Voltar -->
+		<div class="login-menu-container">
+		    <a href="../curso/opcoes-curso" class="login-button">Voltar</a>
+		</div>
+    </div>
+</body>
+</html>

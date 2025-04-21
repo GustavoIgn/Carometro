@@ -17,7 +17,6 @@ public class Coordenador {
 	private Long id;
 
 	private String nome;
-	private String curso;
 
 	private boolean valido = false;
 
@@ -25,7 +24,6 @@ public class Coordenador {
 
 	public Coordenador(DadosCadastroCoordenador dados) {
 		this.nome = dados.nome();
-		this.curso = dados.curso();
 		this.valido = true;
 	}
 	
@@ -36,8 +34,6 @@ public class Coordenador {
 	public void atualizarInformacoes(DadosAtualizacaoCoordenador dados) {
 		if (dados.nome() != null)
 			this.nome = dados.nome();
-		if (dados.curso() != null)
-			this.curso = dados.curso();
 	}
 
 	public Long getId() {
@@ -54,14 +50,6 @@ public class Coordenador {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getCurso() {
-		return curso;
-	}
-
-	public void setCurso(String curso) {
-		this.curso = curso;
 	}
 
 	public boolean isValido() {

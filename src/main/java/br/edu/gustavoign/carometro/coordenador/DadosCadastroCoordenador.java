@@ -5,5 +5,5 @@ import jakarta.validation.constraints.NotBlank;
 public record DadosCadastroCoordenador(
 		
 		@NotBlank
-		String nome, String curso) {
+		String nome) {
 }

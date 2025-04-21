@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Gerenciar Cursos</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="topo-faixa">
+		<div class="logo-texto">FATEC ZONA LESTE</div>
+	</div>
+
+	<div class="container">
+		<h2>Cursos Cadastrados</h2>
+
+		<div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+		<!-- Grade de cursos em cards -->
+		<div class="aluno-grid">
+			<div th:each="curso : ${cursos}" class="aluno-card">
+				<h3 th:text="${curso.nome}">Nome do Curso</h3>
+				<p>
+					<strong>Ano de Implementação:</strong> <span
+						th:text="${curso.anoImplementacao}">2020</span>
+				</p>
+				<p>
+					<strong>Coordenador:</strong> <span th:text="${curso.coord.nome}">Coordenador</span>
+				</p>
+
+				<!-- Ações -->
+				<form th:action="@{/curso/formulario}" method="get" class="mb-2">
+					<input type="hidden" name="id" th:value="${curso.id}" />
+					<button type="submit" class="btn btn-warning">Editar</button>
+				</form>
+
+				<form th:action="@{/curso/excluir}" method="post"
+					style="display: inline;">
+					<input type="hidden" name="id" th:value="${curso.id}" />
+					<button type="submit" class="btn btn-danger btn-sm"
+						onclick="return confirm('Tem certeza que deseja excluir este curso?')">Excluir</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Botão Voltar -->
+	<div class="login-menu-container">
+		<a href="../curso/opcoes-curso" class="login-button">Voltar</a>
+	</div>
+	</div>
+</body>
+</html>

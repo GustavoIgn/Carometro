@@ -25,6 +25,7 @@ public class Usuario {
     @Size(min = 3, max = 20, message = "O usuário precisa conter entre 3 a 20 caracteres")
     private String user;
     private String senha;
+    private boolean concordo = false;
 
     public Long getId() {
         return id;
@@ -65,6 +66,13 @@ public class Usuario {
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
-    
-    
+
+	public boolean isConcordo() {
+		return concordo;
+	}
+
+	public void setConcordo(boolean concordo) {
+		this.concordo = concordo;
+	}
+	
 }

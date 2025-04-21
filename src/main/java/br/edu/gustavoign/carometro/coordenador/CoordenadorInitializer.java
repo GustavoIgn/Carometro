@@ -37,7 +37,6 @@ public class CoordenadorInitializer implements CommandLineRunner {
 		usuarioRepository.save(usuario);
 
 		Coordenador coordenador = new Coordenador();
-		coordenador.setCurso("Curso Padrão");
 		coordenador.setNome("Coordenador Padrão");
 		coordenador.setValido(true);
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.gustavoign.carometro.aluno.AlunoRepository;
+import br.edu.gustavoign.carometro.curso.CursoRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -25,6 +26,8 @@ public class CoordenadorController {
 	private CoordenadorService coordenadorService;
 	@Autowired
 	private AlunoRepository alunoRepository;
+	@Autowired
+	private CursoRepository cursoRepository;
 
 	@GetMapping("/index")
 	public String carregaPaginaFormulario(Long id, Model model) {
@@ -54,11 +57,19 @@ public class CoordenadorController {
 	}
 
 	@GetMapping("/listagem-alunos")
-	public String listarAlunos(Model model) {
-	    model.addAttribute("lista", alunoRepository.findAll(Sort.by("nome").ascending()));
+	public String listarAlunos(@RequestParam(value = "cursoId", required = false) Long cursoId, Model model) {
+	    if (cursoId != null) {
+	        // Filtra os alunos pelo curso selecionado
+	        model.addAttribute("lista", alunoRepository.findByCursoIdOrderByNomeAsc(cursoId));
+	    } else {
+	        // Exibe todos os alunos
+	        model.addAttribute("lista", alunoRepository.findAll(Sort.by("nome").ascending()));
+	    }
+	    model.addAttribute("cursos", cursoRepository.findAll(Sort.by("nome").ascending())); // adiciona os cursos
+	    model.addAttribute("cursoSelecionado", cursoId); // adiciona o curso selecionado no modelo
 	    return "coordenador/listagem-alunos";
 	}
-
+	
 	@PostMapping("/alterar-status")
 	@Transactional
 	public String alterarStatus(@RequestParam("id") Long id, Model model) {

@@ -1,4 +1,4 @@
-<!-- Login Aluno -->
+<!-- Cadastro - Concluído -->
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -43,8 +43,11 @@
 					<div class="cadastro">
 						<a th:href="@{/cadastro(tipo='ALUNO')}">Clique aqui para se cadastrar</a>
 					</div>
-
-					<button type="submit" class="btn btn-primary">Login</button>
+					
+					<div class="botoes-form">
+  						<button type="submit" class="btn btn-primary">Login</button>
+  						<a th:href="@{/}" class="btn btn-voltar">Voltar</a>
+					</div>
 				</form>
 			</div>
 		</div>

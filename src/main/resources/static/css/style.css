@@ -1,132 +1,295 @@
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #e8ecf1; /* tom mais claro que #f0f2f5 */
-  color: #222;
+	margin: 0;
+	font-family: 'Segoe UI', sans-serif;
+	background: #e8ecf1; /* tom mais claro que #f0f2f5 */
+	color: #222;
 }
 
 .container {
-  width: 90%;
-  max-width: 960px;
-  margin: 40px auto;
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+	width: 90%;
+	max-width: 960px;
+	margin: 40px auto;
+	background: #ffffff;
+	padding: 25px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 h2 {
-  text-align: center;
-  color: #003366; /* Azul Fatec */
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+	text-align: center;
+	color: #003366; /* Azul Fatec */
+	font-size: 1.8rem;
+	margin-bottom: 20px;
 }
 
-form input,
-form textarea,
-form button {
-  width: 100%;
-  margin: 10px 0;
-  padding: 12px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
-  font-size: 1rem;
+form input, form textarea, form button {
+	width: 100%;
+	margin: 10px 0;
+	padding: 12px;
+	border: 1px solid #bbb;
+	border-radius: 6px;
+	font-size: 1rem;
 }
 
-form input:focus,
-form textarea:focus {
-  outline: none;
-  border-color: #004aad;
-  box-shadow: 0 0 3px rgba(0, 74, 173, 0.3);
+form input:focus, form textarea:focus {
+	outline: none;
+	border-color: #a30000;;
+	box-shadow: 0 0 3px rgba(0, 74, 173, 0.3);
 }
 
 form button {
-  background: #004aad;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
+	background: #a30000;;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.3s;
 }
 
 form button:hover {
-  background: #003b94;
+	background: #003366;
 }
 
-.coord-grid,
-.aluno-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+.coord-grid, .aluno-grid {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
 }
 
 .aluno-card {
-  background: #f4f6f8;
-  padding: 18px;
-  border-radius: 10px;
-  width: calc(33% - 20px);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  transition: transform 0.2s ease-in-out;
+	background: #f4f6f8;
+	padding: 18px;
+	border-radius: 10px;
+	width: calc(33% - 20px);
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	transition: transform 0.2s ease-in-out;
+	word-wrap: break-word;
+	word-break: break-word;
 }
 
 .aluno-card:hover {
-  transform: translateY(-5px);
+	transform: translateY(-5px);
 }
 
 .foto-aluno {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 10px;
-  border: 2px solid #004aad;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-bottom: 10px;
+	border: 2px solid #a30000;;
 }
 
 .login-menu-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
 }
 
 .login-toggle {
-  display: none;
-}
-
-.login-button {
-  background-color: #004aad;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
+	display: none;
 }
 
 .login-menu {
-  display: none;
-  position: absolute;
-  right: 0;
-  margin-top: 5px;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+	display: none;
+	position: absolute;
+	right: 0;
+	margin-top: 5px;
+	background-color: white;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.login-toggle:checked + .login-button + .login-menu {
-  display: block;
+.login-toggle:checked+.login-button+.login-menu {
+	display: block;
 }
 
 .login-menu a {
-  display: block;
-  padding: 10px 15px;
-  color: #003366;
-  text-decoration: none;
-  font-weight: 500;
+	display: block;
+	padding: 10px 15px;
+	color: #003366;
+	text-decoration: none;
+	font-weight: 500;
 }
 
 .login-menu a:hover {
-  background-color: #eef3f8;
+	background-color: #eef3f8;
+}
+
+.aluno-card {
+	padding: 20px;
+	margin: 10px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Cartão válido (verde) */
+.card-verde {
+	background-color: #d4edda;
+	border: 2px solid #28a745;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+/* Cartão inválido (vermelho) */
+.card-vermelho {
+	background-color: #f8d7da;
+	border: 2px solid #dc3545;
+	word-wrap: break-word;
+	word-break: break-word;
+}
+
+body {
+	margin: 0;
+	font-family: 'Segoe UI', sans-serif;
+	background: #dfe3e6; /* fundo acinzentado */
+	color: #222;
+}
+
+/* Faixa vermelha no topo */
+.topo-faixa {
+	background-color: #b30000; /* vermelho Fatec forte */
+	padding: 15px 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	position: sticky;
+	top: 0;
+	z-index: 999;
+}
+
+/* Texto da faixa */
+.logo-texto {
+	color: white;
+	font-size: 1.5rem;
+	font-weight: bold;
+	font-family: 'Trebuchet MS', sans-serif;
+	letter-spacing: 1px;
+}
+
+/* Estilizando o botão de login */
+.login-button {
+	background-color: #8b0000; /* vermelho escuro */
+	color: white;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: bold;
+	transition: background-color 0.3s ease;
+	text-decoration: none !important;
+}
+
+body {
+	margin: 0;
+	font-family: 'Segoe UI', sans-serif;
+	background: #dfe3e6; /* fundo acinzentado */
+	color: #222;
+}
+
+/* Faixa vermelha no topo */
+.topo-faixa {
+	background-color: #b30000; /* vermelho Fatec forte */
+	padding: 15px 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	position: sticky;
+	top: 0;
+	z-index: 999;
+}
+
+/* Nome do aluno - maior e em negrito */
+.nome-aluno {
+	font-size: 2rem; /* Tamanho maior */
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.aluno-card-meus-dados {
+	background: #f4f6f8;
+	padding: 18px;
+	border-radius: 10px;
+	width: calc(40% - 20px);
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	transition: transform 0.2s ease-in-out;
+}
+
+.aluno-card-meus-dados:hover {
+	transform: translateY(-5px);
+}
+
+form select {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #bbb;
+	border-radius: 6px;
+	font-size: 1rem;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+
+form select:focus {
+	outline: none;
+	border-color: #a30000;
+	box-shadow: 0 0 3px rgba(0, 74, 173, 0.3);
+}
+
+form input[type="file"] {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #bbb;
+	border-radius: 6px;
+	font-size: 1rem;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+form input[type="file"]:focus {
+	outline: none;
+	border-color: #a30000;
+	box-shadow: 0 0 3px rgba(0, 74, 173, 0.3);
+}
+
+.aluno-card-formulario {
+	background: #ffffff;
+	padding: 18px;
+	border-radius: 10px;
+	width: calc(80% - 20px);
+	text-align: center;
+	transition: transform 0.2s ease-in-out;
+}
+
+.aluno-card-formulario:hover {
+	transform: translateY(-5px);
+}
+
+form input, form textarea, form select, form button {
+	width: 100%;
+	/* Faz todos os campos ocuparem 100% da largura do container */
+	margin: 10px 0;
+	padding: 12px;
+	border: 1px solid #bbb;
+	border-radius: 6px;
+	font-size: 1rem;
+	box-sizing: border-box;
+	/* Garante que padding e borda sejam incluídos na largura */
+}
+
+/* Estilo para os campos em foco (focus) */
+form input:focus, form textarea:focus, form select:focus {
+	outline: none;
+	border-color: #a30000;
+	box-shadow: 0 0 3px rgba(0, 74, 173, 0.3);
+}
+
+.card-body {
+	word-wrap: break-word;
+	word-break: break-word;
 }

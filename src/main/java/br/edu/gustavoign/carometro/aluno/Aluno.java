@@ -4,12 +4,15 @@ import java.sql.Blob;
 
 import javax.sql.rowset.serial.SerialBlob;
 
+import br.edu.gustavoign.carometro.curso.Curso;
 import br.edu.gustavoign.carometro.usuario.Usuario;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -36,22 +39,27 @@ public class Aluno {
 	private String nome;
 	private String RA;
 	private String numeroCelular;
-	private String curso;
+	@ManyToOne
+	@JoinColumn(name = "curso_id", nullable = false)
+	private Curso curso;
 	private String anoIngresso;
 	private String links;
+	@Column(name = "comentario_historico", length = 500) // Limite de 500 caracteres
 	private String comentarioHistorico;
+	@Column(name = "comentario_fatec", length = 500) // Limite de 500 caracteres
 	private String comentarioFatec;
+	@Column(name = "comentario_livre", length = 1000) // Limite de 1000 caracteres
 	private String comentarioLivre;
 	private Blob foto;
-	private boolean validado = false;
+	private Boolean validado = false;
 
 	public Aluno() {
 	}
 
-	public Aluno(DadosCadastroAluno dados, Usuario usuario) {
+	public Aluno(DadosCadastroAluno dados, Usuario usuario, Curso curso) {
 		this.nome = dados.nome();
 		this.RA = dados.RA();
-		this.curso = dados.curso();
+		this.curso = curso;
 		this.anoIngresso = dados.anoIngresso();
 		this.links = dados.links();
 		this.comentarioHistorico = dados.comentarioHistorico();
@@ -70,32 +78,24 @@ public class Aluno {
 	}
 
 	public void atualizarInformacoes(DadosAtualizacaoAluno dados) {
-		if (dados.nome() != null)
-			this.nome = dados.nome();
-		if (dados.RA() != null)
-			this.RA = dados.RA();
-		if (dados.curso() != null)
-			this.curso = dados.curso();
-		if (dados.anoIngresso() != null)
-			this.anoIngresso = dados.anoIngresso();
-		if (dados.links() != null)
-			this.links = dados.links();
-		if (dados.comentarioHistorico() != null)
-			this.comentarioHistorico = dados.comentarioHistorico();
-		if (dados.comentarioFatec() != null)
-			this.comentarioFatec = dados.comentarioFatec();
-		if (dados.comentarioLivre() != null)
-			this.comentarioLivre = dados.comentarioLivre();
-		if (dados.foto() != null && !dados.foto().isEmpty()) {
-			try {
-				this.foto = new SerialBlob(dados.foto().getBytes());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (dados.numeroCelular() != null) {
-			this.numeroCelular = dados.numeroCelular();
-		}
+	    if (dados.nome() != null) this.nome = dados.nome();
+	    if (dados.RA() != null) this.RA = dados.RA();
+	    if (dados.anoIngresso() != null) this.anoIngresso = dados.anoIngresso();
+	    if (dados.links() != null) this.links = dados.links();
+	    if (dados.comentarioHistorico() != null) this.comentarioHistorico = dados.comentarioHistorico();
+	    if (dados.comentarioFatec() != null) this.comentarioFatec = dados.comentarioFatec();
+	    if (dados.comentarioLivre() != null) this.comentarioLivre = dados.comentarioLivre();
+	    if (dados.numeroCelular() != null) this.numeroCelular = dados.numeroCelular();
+
+	    // Só altera a foto se o usuário realmente enviar uma nova foto
+	    if (dados.foto() != null && !dados.foto().isEmpty()) {
+	        try {
+	            this.foto = new SerialBlob(dados.foto().getBytes());
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    // Se dados.foto() == null ou vazio, a foto antiga permanece
 	}
 
 	public Long getId() {
@@ -122,11 +122,11 @@ public class Aluno {
 		RA = rA;
 	}
 
-	public String getCurso() {
+	public Curso getCurso() {
 		return curso;
 	}
 
-	public void setCurso(String curso) {
+	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
 

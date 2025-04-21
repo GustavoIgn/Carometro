@@ -1,61 +1,67 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <title>Lista de Alunos</title>
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+	<div class="topo-faixa">
+	    <div class="logo-texto">FATEC ZONA LESTE</div>
+	</div>
 	<div class="container">
 		<h2>Alunos Cadastrados</h2>
-		<div class="aluno-grid">
-			<div th:each="aluno : ${lista}" class="aluno-card">
+		<!-- Filtro por curso -->
+		<form method="get" th:action="@{/coordenador/listagem-alunos}" style="text-align: right;">
+			<label for="cursoId"><strong>Filtrar por curso:</strong></label>
+			<select name="cursoId" id="cursoId" onchange="this.form.submit()">
+				<option value="" th:selected="${cursoSelecionado == null}" selected>Todos os cursos</option>
+				<option th:each="curso : ${cursos}" 
+				        th:value="${curso.id}" 
+				        th:text="${curso.nome}" 
+				        th:selected="${cursoSelecionado != null && cursoSelecionado == curso.id}">
+				</option>
+			</select>
+		</form>
 
+		<!-- Lista de alunos -->
+		<div class="aluno-grid">
+			<div th:each="aluno : ${lista}" th:class="'aluno-card ' + 
+                (${aluno.validado} == true ? 'card-verde' : 
+                (${aluno.validado} == false ? 'card-vermelho'))">
 				<img th:src="@{'/aluno/foto/' + ${aluno.id}}" alt="Foto do Aluno"
 					class="img-thumbnail" style="max-width: 200px;">
-
 				<h3 th:text="${aluno.nome}">Nome</h3>
+		        <p><strong>RA:</strong> <span th:text="${aluno.RA}"></span></p>
+		        <p><strong>Curso:</strong> <span th:text="${aluno.curso.nome}"></span></p>
+		        <p><strong>Ano Ingresso:</strong> <span th:text="${aluno.anoIngresso}"></span></p>
+		        <p><strong>Links:</strong> <span th:text="${aluno.links}"></span></p>
+		        <p><strong>Número de Celular:</strong> <span th:text="${aluno.numeroCelular}"></span></p>
+		        <p><strong>Sobre Mim:</strong> <span th:text="${aluno.comentarioHistorico}"></span></p>
+		        <p><strong>Sobre a Fatec:</strong> <span th:text="${aluno.comentarioFatec}"></span></p>
+		        <p><strong>Que tal?</strong> <span th:text="${aluno.comentarioLivre}"></span></p>
+
+				<!-- Status -->
 				<p>
-					<strong>RA:</strong> <span th:text="${aluno.RA}"></span>
-				</p>
-				<p>
-					<strong>Curso:</strong> <span th:text="${aluno.curso}"></span>
-				</p>
-				<p>
-					<strong>Ano:</strong> <span th:text="${aluno.anoIngresso}"></span>
-				</p>
-				<p>
-					<strong>Sobre Mim:</strong> <span
-						th:text="${aluno.comentarioHistorico}"></span>
-				</p>
-				<p>
-					<strong>Sobre a Fatec:</strong> <span
-						th:text="${aluno.comentarioFatec}"></span>
-				</p>
-				<p>
-					<strong>Que tal?</strong> <span th:text="${aluno.comentarioLivre}"></span>
+					<strong>Status:</strong>
+					<span th:text="${aluno.validado} ? 'Válido' : 'Inválido'"
+					      th:classappend="${aluno.validado} ? 'status-valido' : 'status-invalido'"></span>
 				</p>
 
-				<!-- STATUS -->
-				<p>
-					<strong>Status:</strong> <span
-						th:text="${aluno.validado} ? 'Válido' : 'Inválido'"
-						th:classappend="${aluno.validado} ? 'status-valido' : 'status-invalido'">
-					</span>
-				</p>
-
-				<!-- BOTÃO DE VALIDAÇÃO -->
+				<!-- Botão de validação -->
 				<form th:action="@{/coordenador/alterar-status}" method="post">
 					<input type="hidden" name="id" th:value="${aluno.id}" />
 					<button type="submit"
-						th:text="${aluno.validado} ? 'Marcar como Inválido' : 'Marcar como Válido'"
-						class="botao-status"></button>
+					        th:text="${aluno.validado} ? 'Marcar como Inválido' : 'Marcar como Válido'"
+					        class="botao-status"></button>
 				</form>
 			</div>
-			<form th:action="@{/}">
-				<button type="submit" class="btn btn-outline-danger btn-sm">Voltar</button>
-			</form>
 		</div>
+	</div>
+
+	<!-- Botão Voltar -->
+	<div class="login-menu-container">
+	    <a href="/coordenador/index" class="login-button">Voltar</a>
 	</div>
 </body>
 </html>

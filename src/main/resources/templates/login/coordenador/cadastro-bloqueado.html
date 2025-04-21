@@ -1,28 +1,30 @@
-<!-- Coordenador -->
+<!-- Cadastro - Concluído -->
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
-<title>Sou Coordenador</title>
-<link rel="stylesheet" href="css/login.css">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
-<script src="https://kit.fontawesome.com/006642858d.js"></script>
-<link
-	href="https://fonts.googleapis.com/css2?family=Handlee&display=swap"
-	rel="stylesheet">
-</head>
-<title>Cadastro Coordenador Bloqueado</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro Coordenador Bloqueado</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+  <script src="https://kit.fontawesome.com/006642858d.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
 </head>
 <body>
-	<h2>Cadastro de Coordenador</h2>
-	<p th:text="${mensagem}"></p>
-	<a href="/login?tipo=COORDENADOR">Ir para o Login</a>
-
-	<form th:action="@{/}">
-		<button type="submit" class="btn btn-outline-danger btn-sm">Voltar</button>
-	</form>
+  <div class="Login-Form">
+    <div class="container">
+      <div class="main-div">
+        <div class="texto-header">
+          <h2>Cadastro Bloqueado</h2>
+          <p th:text="${mensagem}">Não estamos aceitando novos cadastros de coordenadores no momento.</p>
+        </div>
+        <div class="botoes-form">
+          <a href="/login?tipo=COORDENADOR" class="btn btn-primary no-underline" style no underline>Ir para o Login</a>
+          <a href="/" class="btn btn-voltar">Voltar</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

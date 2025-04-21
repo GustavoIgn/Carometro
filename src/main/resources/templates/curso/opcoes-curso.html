@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciar Cursos</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="topo-faixa">
+	    <div class="logo-texto">FATEC ZONA LESTE</div>
+	</div>
+    <div class="container">
+        <h2>Gestão de Cursos</h2>
+        <div class="coord-grid">
+            <!-- Card de Cadastrar Curso -->
+            <div class="aluno-card"
+                 onclick="window.location.href='/curso/formulario'">
+                <h3>Cadastrar Curso</h3>
+                <p>Adicionar um novo curso ao sistema.</p>
+            </div>
+
+            <!-- Card de Listar Cursos -->
+            <div class="aluno-card"
+                 onclick="window.location.href='/curso/gerenciar'">
+                <h3>Ver Cursos</h3>
+                <p>Editar ou excluir cursos já cadastrados.</p>
+            </div>
+        </div>
+    </div>
+  	<!-- Botão Voltar -->
+	<div class="login-menu-container">
+	    <a href="../coordenador/index" class="login-button">Voltar</a>
+	</div>
+</body>
+</html>

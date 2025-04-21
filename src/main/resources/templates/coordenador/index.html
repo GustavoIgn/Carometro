@@ -6,27 +6,29 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+	<div class="topo-faixa">
+	    <div class="logo-texto">FATEC ZONA LESTE</div>
+	</div>
 	<div class="container">
 		<h2>Alunos e Cursos</h2>
 		<div class="coord-grid">
 			<!-- Card de Alunos -->
-			<div class="aluno-card"
-				onclick="window.location.href='/coordenador/listagem-alunos'">
+			<div class="aluno-card" onclick="window.location.href='/coordenador/listagem-alunos'">
 				<h3>Alunos</h3>
 				<p>Ver cadastros pendentes e aprovar ou negar.</p>
 			</div>
 
 			<!-- Card de Cursos -->
-			<div class="aluno-card"
-				onclick="window.location.href='gerenciar-cursos.html'">
+			<div class="aluno-card" onclick="window.location.href='/curso/opcoes-curso'">
 				<h3>Cursos</h3>
 				<p>CRUD geral dos cursos da faculdade.</p>
 			</div>
-
-			<form th:action="@{/}">
-				<button type="submit" class="btn btn-outline-danger btn-sm">Voltar</button>
-			</form>
 		</div>
+	</div>
+
+	<!-- Botão Voltar -->
+	<div class="login-menu-container">
+	    <a href="/" class="login-button">Voltar</a>
 	</div>
 </body>
 </html>

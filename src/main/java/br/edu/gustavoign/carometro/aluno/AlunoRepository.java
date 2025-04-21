@@ -10,4 +10,9 @@ public interface AlunoRepository extends JpaRepository<Aluno, Long> {
 	void deleteByUsuarioId(Long usuarioId);
 	List<Aluno> findByValidadoTrue(Sort sort);
 	List<Aluno> findByValidadoFalse();
+	List<Aluno> findByValidadoTrueOrderByNomeAsc();
+	List<Aluno> findByCursoIdAndValidadoTrueOrderByNomeAsc(Long cursoId);
+	List<Aluno> findByCursoIdOrderByNomeAsc(Long cursoId);
+	long countByCursoIdAndValidadoTrue(Long id);
+	void deleteByCursoIdAndValidadoFalse(Long id);
 }

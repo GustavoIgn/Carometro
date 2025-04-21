@@ -16,6 +16,9 @@ import br.edu.gustavoign.carometro.aluno.AlunoRepository;
 import br.edu.gustavoign.carometro.coordenador.Coordenador;
 import br.edu.gustavoign.carometro.coordenador.CoordenadorRepository;
 import br.edu.gustavoign.carometro.coordenador.DadosCadastroCoordenador;
+import br.edu.gustavoign.carometro.curso.CursoRepository;
+import br.edu.gustavoign.carometro.exception.CriptoExistsException;
+import br.edu.gustavoign.carometro.exception.EmailExistsException;
 import br.edu.gustavoign.carometro.exception.ServiceExc;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -36,6 +39,9 @@ public class UsuarioController {
 	@Autowired
 	private CoordenadorRepository coordenadorRepository;
 
+	@Autowired
+	private CursoRepository cursoRepository;
+
 	/*
 	 * @Autowired private EmailService emailService;
 	 */
@@ -44,6 +50,7 @@ public class UsuarioController {
 	public ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView("home/index");
 		modelAndView.addObject("lista", alunoRepository.findByValidadoTrue(Sort.by("nome").ascending()));
+		modelAndView.addObject("cursos", cursoRepository.findAll(Sort.by("nome").ascending())); // adiciona os cursos
 		return modelAndView;
 	}
 
@@ -68,37 +75,45 @@ public class UsuarioController {
 
 	@GetMapping("/cadastro")
 	public ModelAndView cadastro(@RequestParam String tipo) {
-	    if (tipo.equalsIgnoreCase("coordenador")) {
-	        ModelAndView mv = new ModelAndView("login/coordenador/cadastro-bloqueado");
-	        mv.addObject("mensagem", "No momento, não estamos aceitando novos cadastros de coordenador. Use o usuário e senha fornecidos.");
-	        return mv;
-	    }
+		if (tipo.equalsIgnoreCase("coordenador")) {
+			ModelAndView mv = new ModelAndView("login/coordenador/cadastro-bloqueado");
+			mv.addObject("mensagem",
+					"No momento, não estamos aceitando novos cadastros de coordenador. Use o usuário e senha fornecidos.");
+			return mv;
+		}
 
-	    ModelAndView modelAndView = new ModelAndView("login/" + tipo.toLowerCase() + "/cadastro");
-	    modelAndView.addObject("tipoSelecionado", tipo);
-	    modelAndView.addObject("usuario", new Usuario());
-	    return modelAndView;
+		ModelAndView modelAndView = new ModelAndView("login/" + tipo.toLowerCase() + "/cadastro");
+		modelAndView.addObject("tipoSelecionado", tipo);
+		modelAndView.addObject("usuario", new Usuario());
+		return modelAndView;
 	}
 
 	@PostMapping("/salvarUsuario")
 	public ModelAndView cadastrar(@RequestParam("tipo") String tipoStr, Usuario usuario,
-			@RequestParam(value = "nome", required = false) String nome,
-			@RequestParam(value = "curso", required = false) String curso) throws Exception {
+	        @RequestParam(value = "nome", required = false) String nome,
+	        @RequestParam(value = "curso", required = false) String curso) throws Exception {
 
-		try {
-			// Verifica se o tipo de usuário é válido
-			TipoUsuario tipo = TipoUsuario.valueOf(tipoStr);
-			usuario.setTipo(tipo);
-			serviceUsuario.salvarUsuario(usuario); // Salva o usuário no banco
+	    ModelAndView modelAndView = new ModelAndView("login/" + tipoStr + "/cadastro");
+	    modelAndView.addObject("usuario", usuario);
+	    modelAndView.addObject("tipoSelecionado", tipoStr);
+
+	    if (!usuario.isConcordo()) {
+	        modelAndView.addObject("msg", "Você deve concordar com o compartilhamento dos dados.");
+	        return modelAndView;
+	    }
+
+	    try {
+	        TipoUsuario tipo = TipoUsuario.valueOf(tipoStr);
+	        usuario.setTipo(tipo);
+	        serviceUsuario.salvarUsuario(usuario); // Salva o usuário no banco
 
 			// Se for coordenador, cria um coordenador com os dados adicionais
 			if (tipo == TipoUsuario.COORDENADOR) {
 				// Verifica se os dados do coordenador foram passados
 				if (nome != null && curso != null) {
-					DadosCadastroCoordenador dados = new DadosCadastroCoordenador(nome, curso);
+					DadosCadastroCoordenador dados = new DadosCadastroCoordenador(nome);
 					Coordenador coordenador = new Coordenador(dados);
 					coordenador.setNome(nome); // Nome do coordenador
-					coordenador.setCurso(curso); // Curso que o coordenador administra
 
 					// Gerar um token de validação único
 					String tokenValidacao = UUID.randomUUID().toString();
@@ -115,8 +130,17 @@ public class UsuarioController {
 					 */
 				}
 			}
+		} catch (EmailExistsException e) {
+			modelAndView.addObject("msg", "E-mail já está em uso.");
+			return modelAndView;
+
+		} catch (CriptoExistsException e) {
+			modelAndView.addObject("msg", "Nome de usuário já está em uso.");
+			return modelAndView;
+
 		} catch (Exception e) {
-			return new ModelAndView("redirect:/cadastro?tipo=" + tipoStr);
+			modelAndView.addObject("msg", "Erro ao cadastrar. Tente novamente.");
+			return modelAndView;
 		}
 
 		return new ModelAndView("redirect:/login?tipo=" + tipoStr);
