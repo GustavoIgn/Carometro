@@ -1,6 +1,5 @@
 package br.edu.gustavoign.carometro.coordenador;
 
-<<<<<<< HEAD
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,19 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-=======
-import jakarta.persistence.*;
-import lombok.*;
->>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 
 @Entity
 @Table(name = "coordenador")
 @Getter
 @Setter
-<<<<<<< HEAD
-=======
-@NoArgsConstructor
->>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Coordenador {
