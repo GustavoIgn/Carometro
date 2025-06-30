@@ -1,0 +1,118 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #b30000, #8b0000); /* Gradiente de vermelho */
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Login-Form {
+ width: 100%;
+  max-width: 480px; /* Card maior */
+  background: white;
+  padding: 40px 50px; /* Mais espaçamento interno */
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.texto-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.texto-header h2 {
+  margin-bottom: 5px;
+  color: #003366;; /* Cor vermelha mais escura */
+}
+
+.texto-header p {
+  font-size: 14px;
+  color: #666;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  border-color: #b30000; /* Bordas vermelhas ao focar */
+  outline: none;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  background-color: #b30000; /* Botão vermelho escuro */
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #8b0000; /* Tom mais escuro de vermelho para hover */
+}
+
+.cadastro {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.cadastro a {
+  color: #b30000;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.cadastro a:hover {
+  text-decoration: underline;
+}
+
+.alert-danger {
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #8b0000;
+  background-color: #f8d7da;
+  border: 1px solid #dc3545;
+}
+.botoes-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.btn-voltar {
+  padding: 10px 20px;
+  background-color: #6c757d; /* cinza Bootstrap */
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+  font-size: 14px;
+}
+
+.btn-voltar:hover {
+  background-color: #5a6268; /* cinza mais escuro no hover */
+}
+
+.no-underline {
+  text-decoration: none !important;
+}

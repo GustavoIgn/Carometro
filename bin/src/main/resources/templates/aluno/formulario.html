@@ -1,0 +1,55 @@
+<!-- formulario.html (usado no método /aluno/formulario) -->
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Cadastro de Aluno</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <!-- Faixa vermelha no topo -->
+  <div class="topo-faixa">
+    <span class="logo-texto">Fatec Zona Leste</span>
+  </div>
+	<div class="container">
+		<h2 th:text="${aluno != null} ? 'Editar Aluno' : 'Cadastro de Aluno'">Cadastro
+			de Aluno</h2>
+	<div class="aluno-grid">
+		<div class="aluno-card-formulario">
+			<form th:action="@{/aluno}" method="post" th:object="${aluno}"
+				enctype="multipart/form-data">
+				<input type="hidden" th:field="*{id}" /> 
+				<input type="text" th:field="*{nome}" placeholder="Nome completo" required /> 
+				<input type="text" th:field="*{RA}" placeholder="RA" required /> 
+				<select name="cursoId" class="form-control" required>
+	    			<option value="">Selecione um curso</option>
+	    			<th:block th:each="curso : ${cursos}">
+	        			<option th:value="${curso.id}" th:text="${curso.nome}" 
+	            			th:selected="${aluno.curso != null} ? ${curso.id} == ${aluno.curso.id} : false">
+	        			</option>
+	    			</th:block>
+				</select>
+				<input type="tel" name="numeroCelular" th:field="*{numeroCelular}" placeholder="Número de Celular (Opcional)"/> 
+				<input type="number" th:field="*{anoIngresso}" placeholder="Ano Ingresso" min="1900" max="2050" required />
+				<input type="url" th:field="*{links}" placeholder="Links (LinkedIn, GitHub...)" />
+				<textarea th:field="*{comentarioHistorico}" placeholder="Comentário Histórico"maxlength="499"></textarea>
+				<textarea th:field="*{comentarioFatec}" placeholder="Comentário Fatec"maxlength="499"></textarea>
+				<textarea th:field="*{comentarioLivre}" placeholder="Comentário Livre"maxlength="499"></textarea>
+				<input type="file" th:field="*{foto}" name="foto" accept="image/*" />
+				<img th:src="@{/aluno/foto/{id}(id=${aluno.id})}" alt="Foto do Aluno" class="img-thumbnail mb-3" style="max-width: 200px;" />
+				<button type="submit">Cadastrar</button>
+			</form>
+			<form th:action="@{/deletar-conta}" method="post" class="text-end">
+				<button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir sua conta?')">
+					Apagar Conta
+				</button>
+			</form>
+	
+			<form th:action="${aluno != null} ? @{/aluno/meus-dados} : @{/}">
+				<button type="submit" class="btn btn-outline-danger btn-sm">Voltar</button>
+			</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

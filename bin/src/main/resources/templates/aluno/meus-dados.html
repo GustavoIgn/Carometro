@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Meus Dados</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Faixa vermelha no topo -->
+  <div class="topo-faixa">
+    <span class="logo-texto">Fatec Zona Leste</span>
+  </div>
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">Meus Dados</h2>
+	<div class="aluno-grid">
+		<div class="aluno-card-meus-dados">
+		    <div class="card mx-auto" style="max-width: 600px;">
+		      <div class="card-body text-center">
+		        <!-- Foto centralizada -->
+		        <img th:src="@{'/aluno/foto/' + ${aluno.id}}" alt="Foto do Aluno"
+		          class="img-thumbnail mb-3 foto-centralizada" style="max-width: 200px;">
+		
+		        <!-- Nome maior e em negrito -->
+		        <h5 class="card-title nome-aluno" th:text="${aluno.nome}">Nome do Aluno</h5>
+		
+		        <p><strong>RA:</strong> <span th:text="${aluno.RA}"></span></p>
+		        <p><strong>Curso:</strong> <span th:text="${aluno.curso.nome}"></span></p>
+		        <p><strong>Ano Ingresso:</strong> <span th:text="${aluno.anoIngresso}"></span></p>
+		        <p><strong>Links:</strong> <span th:text="${aluno.links}"></span></p>
+		        <p><strong>Número de Celular:</strong> <span th:text="${aluno.numeroCelular}"></span></p>
+		        <p><strong>Sobre Mim:</strong> <span th:text="${aluno.comentarioHistorico}"></span></p>
+		        <p><strong>Sobre a Fatec:</strong> <span th:text="${aluno.comentarioFatec}"></span></p>
+		        <p><strong>Que tal?</strong> <span th:text="${aluno.comentarioLivre}"></span></p>
+		
+		        <form th:action="@{/aluno/formulario}" method="get" class="mb-2">
+		          <input type="hidden" name="id" th:value="${aluno.id}" />
+		          <button type="submit" class="btn btn-warning">Editar</button>
+		        </form>
+		
+		        <form th:action="@{/aluno}" method="post"
+		          onsubmit="return confirm('Tem certeza que deseja excluir seus dados?')">
+		          <input type="hidden" name="_method" value="delete" />
+		          <input type="hidden" name="id" th:value="${aluno.id}" />
+		          <button type="submit" class="btn btn-danger">Excluir</button>
+		        </form>
+		
+		        <form th:action="@{/deletar-conta}" method="post" class="mt-3">
+		          <button type="submit" class="btn btn-outline-danger btn-sm"
+		            onclick="return confirm('Tem certeza que deseja excluir sua conta?')">
+		            Apagar Conta
+		          </button>
+		        </form>
+		
+		        <form th:action="@{/}" class="mt-2">
+		          <button type="submit" class="btn btn-outline-secondary btn-sm">Voltar</button>
+		        </form>
+		        <div th:if="${!aluno.validado}" class="mt-3">
+		          <p style="color: red;">Seu cadastro ainda não foi validado por
+		            um coordenador ou foi considerado inválido. Aguarde ou verifique as informações.
+		          </p>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+	  </div>
+  </div>
+</body>
+</html>
