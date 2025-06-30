@@ -18,12 +18,20 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+<<<<<<< HEAD
+=======
+import lombok.NoArgsConstructor;
+>>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 import lombok.Setter;
 
 @Entity
 @Table(name = "aluno")
 @Getter
 @Setter
+<<<<<<< HEAD
+=======
+@NoArgsConstructor
+>>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Aluno {

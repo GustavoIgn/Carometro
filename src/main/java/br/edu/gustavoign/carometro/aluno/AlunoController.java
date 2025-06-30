@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+<<<<<<< HEAD
 import org.springframework.web.servlet.ModelAndView;
+=======
+>>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 
 import br.edu.gustavoign.carometro.curso.Curso;
 import br.edu.gustavoign.carometro.curso.CursoRepository;
@@ -52,9 +55,12 @@ public class AlunoController {
 	    }
 
 	    List<Curso> cursos = cursoRepository.findAll();
+<<<<<<< HEAD
 	    if (cursos.isEmpty()) {
 	    	return "redirect:/aluno/sem-curso";
 	    }
+=======
+>>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 	    model.addAttribute("aluno", aluno);
 	    model.addAttribute("cursos", cursos); // Envia a lista de cursos para o HTML
 
@@ -193,6 +199,7 @@ public class AlunoController {
 	    model.addAttribute("cursoSelecionado", cursoId); // Mantém o curso selecionado para exibição no dropdown
 	    return "home/index";
 	}
+<<<<<<< HEAD
 	
 	@GetMapping("/sem-curso")
 	public ModelAndView paginaSemCurso() {
@@ -200,4 +207,6 @@ public class AlunoController {
 		mv.addObject("mensagem", "Parece que não há cursos carregados para esta faculdade, contate seu coordenador e solicite o cadastro do seu curso.");
 		return mv;
 	}
+=======
+>>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 }

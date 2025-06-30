@@ -12,7 +12,11 @@
     <span class="logo-texto">Fatec Zona Leste</span>
   </div>
 	<div class="container">
+<<<<<<< HEAD
 		<h2 th:text="${aluno.id != null} ? 'Editar Aluno' : 'Cadastro de Aluno'">Cadastro
+=======
+		<h2 th:text="${aluno != null} ? 'Editar Aluno' : 'Cadastro de Aluno'">Cadastro
+>>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 			de Aluno</h2>
 	<div class="aluno-grid">
 		<div class="aluno-card-formulario">
@@ -45,7 +49,11 @@
 				</button>
 			</form>
 	
+<<<<<<< HEAD
 			<form th:action="${aluno.id != null} ? @{/aluno/meus-dados} : @{/}">
+=======
+			<form th:action="${aluno != null} ? @{/aluno/meus-dados} : @{/}">
+>>>>>>> f5e5ca8bfa5d378ba3ea3dff69cd24e22ad0b5db
 				<button type="submit" class="btn btn-outline-danger btn-sm">Voltar</button>
 			</form>
 			</div>
